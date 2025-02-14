@@ -6,6 +6,11 @@
     <title>Inicio</title>
 </head>
 <body>
+    <nav>
+        <a href={% url "inicio" %}>Inicio</a>
+        <a href={% url "crear_servicio" %}>Crear Servicio</a>
+        <a href={% url "listar_servicios" %}>Listar Servicios</a>
+    </nav>
     <h1>Inicio!</h1>
     <p>Esta es mi primera vista!!</p>
     <!-- <p>{{ mensaje }}</p> -->

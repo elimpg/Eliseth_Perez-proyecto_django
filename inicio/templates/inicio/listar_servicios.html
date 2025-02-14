@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Servicio</title>
+    <title>Lista Servicios</title>
 </head>
 <body>
     <nav>
@@ -11,11 +11,14 @@
         <a href={% url "crear_servicio" %}>Crear Servicio</a>
         <a href={% url "listar_servicios" %}>Listar Servicios</a>
     </nav>
-    <h1>Crear Servicio</h1>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ formulario }}
-        <input type="submit" value="Crear">
-    </form>
+    {% if servicios %}
+    <ul>
+        {% for servicio in  servicios%}
+            <li> {{servicio}}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        No hay servicios
+    {% endif %}
 </body>
 </html>
