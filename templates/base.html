@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title_head %}{% endblock title_head %}</title>
+</head>
+<body>
+    <nav>
+        <a href={% url "inicio" %}>Inicio</a>
+        <a href={% url "crear_servicio" %}>Crear Servicio</a>
+        <a href={% url "listar_servicios" %}>Listar Servicios</a>
+    </nav>
+    {% block search_form %}{% endblock search_form %}
+    <h1>{% block header %}{% endblock header %}</h1>
+    {% block content %}{% endblock content %}
+</body>
+</html>

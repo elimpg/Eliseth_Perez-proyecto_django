@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from inicio.models import Servicio
-from inicio.forms import CrearServicio
+from inicio.forms import CrearServicio, BuscarServicios
 
 # Create your views here.
 def inicio(request):
@@ -25,5 +25,9 @@ def crear_servicio(request):
     return render(request, 'inicio/crear_servicio.html', {'formulario': formulario})
 
 def listar_servicios(request):
-    servicios = Servicio.objects.all()
-    return render(request, 'inicio/listar_servicios.html', {'servicios': servicios})
+    formulario = BuscarServicios(request.GET)
+    if formulario.is_valid():
+        nombre = formulario.cleaned_data.get('nombre')
+        servicios = Servicio.objects.filter(nombre__icontains=nombre)
+        
+    return render(request, 'inicio/listar_servicios.html', {'servicios': servicios, 'formulario': formulario})
