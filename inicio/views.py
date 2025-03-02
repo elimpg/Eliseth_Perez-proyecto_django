@@ -31,3 +31,12 @@ def listar_servicios(request):
         servicios = Servicio.objects.filter(nombre__icontains=nombre)
         
     return render(request, 'inicio/listar_servicios.html', {'servicios': servicios, 'formulario': formulario})
+
+def detalle_servicio(request, id):
+    servicio = Servicio.objects.get(id=id)
+    return render(request, 'inicio/detalle_servicio.html', {'servicio': servicio})
+
+def eliminar_servicio(request, id):
+    servicio = Servicio.objects.get(id=id)
+    servicio.delete()
+    return redirect("listar_servicios")

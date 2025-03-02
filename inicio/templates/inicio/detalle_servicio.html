@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title_head %}Detalle Servicio{% endblock title_head %}
+{% block header %}Detalle del Servicio{% endblock header %}
+
+{% block content %}
+    <ul>
+        <li>Servicio: {{servicio.nombre}} </li>
+        <li>Precio: $ {{servicio.precio}} </li>
+        <li>Tiempo: {{servicio.tiempo}} </li>
+        <li>Descripcion: {{servicio.descripcion}} </li>
+    </ul>
+
+    <a class="btn btn-outline-dark mt-auto" href={% url "eliminar_servicio" servicio.id %}>Eliminar</a>
+{% endblock content %} 
