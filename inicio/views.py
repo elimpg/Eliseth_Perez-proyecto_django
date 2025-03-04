@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from inicio.models import Servicio
-from inicio.forms import CrearServicio, BuscarServicios
+from inicio.forms import CrearServicio, BuscarServicios, EditarServicioFormulario
+from django.views.generic.edit import UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 # Create your views here.
 def inicio(request):
@@ -16,7 +18,8 @@ def crear_servicio(request):
                 nombre = formulario.cleaned_data.get('nombre'),
                 precio = formulario.cleaned_data.get('precio'),
                 tiempo = formulario.cleaned_data.get('tiempo'),
-                descripcion = formulario.cleaned_data.get('descripcion')
+                descripcion = formulario.cleaned_data.get('descripcion'),
+                fecha_creacion = formulario.cleaned_data.get('fecha_creacion')
             )
             servicio.save()
             return redirect("listar_servicios")
@@ -40,3 +43,15 @@ def eliminar_servicio(request, id):
     servicio = Servicio.objects.get(id=id)
     servicio.delete()
     return redirect("listar_servicios")
+
+class EditarServicio(UpdateView):
+    model = Servicio
+    template_name = 'inicio/editar_servicio.html'
+    success_url = reverse_lazy("listar_servicios")
+    # fields = '__all__'
+    form_class = EditarServicioFormulario
+    
+class EliminarServicio(DeleteView):
+    model = Servicio
+    template_name = 'inicio/eliminar_servicio.html'
+    success_url = reverse_lazy("listar_servicios")
