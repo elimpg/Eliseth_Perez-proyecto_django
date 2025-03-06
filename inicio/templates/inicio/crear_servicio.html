@@ -4,7 +4,7 @@
 {% block header %}Crear Servicio{% endblock header %}
 
 {% block content %}
-<form action="{% url "crear_servicio" %}" method="POST">
+<form action="{% url "crear_servicio" %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ formulario }}
     <input type="submit" value="Crear">

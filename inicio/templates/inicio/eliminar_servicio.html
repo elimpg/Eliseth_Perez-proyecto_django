@@ -4,7 +4,7 @@
 {% block header %}Eliminar {{ servicio.nombre }}{% endblock header %}
 
 {% block content %}
-<form action="" method="POST">
+<form action="{% url "eliminar_servicio" servicio.pk %}" method="POST">
     {% csrf_token %}
     <p>Seguro que desea eliminar el servicio?</p>
     <input type="submit" value="Confirmar">

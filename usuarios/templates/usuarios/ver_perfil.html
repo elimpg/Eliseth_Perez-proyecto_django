@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title_head %}Perfil Usuario{% endblock title_head %}
+{% block header %}Perfil Usuario{% endblock header %}
+
+{% block content %}
+    <ul>
+        <li>Username: {{request.user.username}} </li>
+        <li>Email: {{request.user.email}} </li>
+        <li>Nombre: {{request.user.first_name}} </li>
+        <li>Apellido: {{request.user.last_name}} </li>
+    </ul>
+
+    <a class="btn btn-outline-dark mt-auto" href="{% url 'editar_perfil' %}">Editar</a>
+{% endblock content %}

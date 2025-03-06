@@ -25,6 +25,25 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href={% url "inicio" %}>Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href={% url "crear_servicio" %}>Crear Servicio</a></li>
                         <li class="nav-item"><a class="nav-link" href={% url "listar_servicios" %}>Listar Servicios</a></li>
+
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'ver_perfil' %}">
+                                {% if request.user.infoextra.avatar %}
+                                    <img src="{{ request.user.infoextra.avatar.url }}" alt="Imagen de Perfil" height="30px">
+                                {% endif %}
+                                {{ request.user.username }} 
+                            </a></li>        
+                            {% comment %} <li class="nav-item"><a class="nav-link" href="{% url 'editar_perfil' %}">{{ request.user.username }}</a></li>         {% endcomment %}
+                            <li class="nav-item">
+                                <form action={% url "logout" %} method="POST" >
+                                    {% csrf_token %}
+                                    <input class="btn btn-secondary" type="submit" value="Cerrar Sesión">
+                                </form>
+                            </li>                        
+                        {% else %}
+                            <li class="nav-item"><a class="btn btn-outline-secondary" href={% url "login" %}>Iniciar Sesión</a></li>
+                            <li class="nav-item"><a class="btn btn-outline-secondary" href={% url "registrar" %}>Registrar</a></li>
+                        {% endif %}
                     </ul>
                     {% block search_form %}{% endblock search_form %}
                 </div>

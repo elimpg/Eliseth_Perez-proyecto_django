@@ -3,6 +3,7 @@ from inicio.models import Servicio
 from inicio.forms import CrearServicio, BuscarServicios, EditarServicioFormulario
 from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def inicio(request):
@@ -11,7 +12,7 @@ def inicio(request):
 def crear_servicio(request):
     formulario = CrearServicio()
     if request.method == "POST":
-        formulario = CrearServicio(request.POST)
+        formulario = CrearServicio(request.POST, request.FILES)
         if formulario.is_valid():
             print('Cleaned Data: ', formulario.cleaned_data)
             servicio = Servicio (
@@ -19,7 +20,8 @@ def crear_servicio(request):
                 precio = formulario.cleaned_data.get('precio'),
                 tiempo = formulario.cleaned_data.get('tiempo'),
                 descripcion = formulario.cleaned_data.get('descripcion'),
-                fecha_creacion = formulario.cleaned_data.get('fecha_creacion')
+                fecha_creacion = formulario.cleaned_data.get('fecha_creacion'),
+                imagen = formulario.cleaned_data.get('imagen')
             )
             servicio.save()
             return redirect("listar_servicios")
@@ -44,14 +46,14 @@ def eliminar_servicio(request, id):
     servicio.delete()
     return redirect("listar_servicios")
 
-class EditarServicio(UpdateView):
+class EditarServicio(LoginRequiredMixin, UpdateView):
     model = Servicio
     template_name = 'inicio/editar_servicio.html'
     success_url = reverse_lazy("listar_servicios")
     # fields = '__all__'
     form_class = EditarServicioFormulario
     
-class EliminarServicio(DeleteView):
+class EliminarServicio(LoginRequiredMixin, DeleteView):
     model = Servicio
     template_name = 'inicio/eliminar_servicio.html'
     success_url = reverse_lazy("listar_servicios")

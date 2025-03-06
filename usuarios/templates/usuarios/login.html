@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title_head %}Login{% endblock title_head %}
+{% block header %}Login{% endblock header %}
+
+{% block content %}
+<form action="{% url "login" %}" method="POST">
+    {% csrf_token %}
+    {{ formulario }}
+    <input type="submit" value="Login">
+</form>
+{% endblock content %} 

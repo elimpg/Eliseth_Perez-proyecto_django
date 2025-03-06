@@ -4,7 +4,7 @@
 {% block header %}Editar Servicio{% endblock header %}
 
 {% block content %}
-<form action="" method="POST">
+<form action="{% url "editar_servicio" servicio.pk %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Guardar">
