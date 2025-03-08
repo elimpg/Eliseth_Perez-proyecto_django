@@ -9,7 +9,7 @@
     </form>
 {% endblock search_form %}
 
-{% block header %}Servicios ofrecidos{% endblock header %}
+{% block header_h1 %}Servicios Ofrecidos{% endblock header_h1 %}
 
 {% block content %}
 
@@ -20,11 +20,10 @@
 
                     {% if servicios %}
                         {% for servicio in  servicios%}
-
                             <div class="col mb-5">
                                 <div class="card h-100">
                                     <!-- Product image-->
-                                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="Imagen Servicio" />
+                                     <img class="card-img-top" src="{% if servicio.imagen %}{{ servicio.imagen.url }}{% else %}https://dummyimage.com/450x300/dee2e6/6c757d.jpg{% endif %}" alt="Imagen Servicio" />
                                     <!-- Product details-->
                                     <div class="card-body p-4">
                                         <div class="text-center">
@@ -51,6 +50,7 @@
                     {% else %}
                         No hay servicios
                     {% endif %}
+                    
                 </div>
             </div>
         </section>

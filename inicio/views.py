@@ -57,3 +57,6 @@ class EliminarServicio(LoginRequiredMixin, DeleteView):
     model = Servicio
     template_name = 'inicio/eliminar_servicio.html'
     success_url = reverse_lazy("listar_servicios")
+    
+def acerca_de(request):
+    return render(request, "inicio/acerca_de.html")

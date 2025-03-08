@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title_head %}Editar Servicio{% endblock title_head %}
-{% block header %}Editar Servicio{% endblock header %}
+{% block header_h1 %}Editar Servicio{% endblock header_h1 %}
 
 {% block content %}
 <form action="{% url "editar_servicio" servicio.pk %}" method="POST" enctype="multipart/form-data">

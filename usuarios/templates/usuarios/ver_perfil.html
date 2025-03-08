@@ -9,6 +9,7 @@
         <li>Email: {{request.user.email}} </li>
         <li>Nombre: {{request.user.first_name}} </li>
         <li>Apellido: {{request.user.last_name}} </li>
+        <li>Fecha de Nacimiento: {{request.user.infoextra.fecha_nac}} </li>
     </ul>
 
     <a class="btn btn-outline-dark mt-auto" href="{% url 'editar_perfil' %}">Editar</a>
